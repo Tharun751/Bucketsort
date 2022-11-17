@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bucket Sort</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+<style>
+    body{
+       
+        background: linear-gradient(45deg, #0099ff, #66ff00);
+    }
+.pt10 {
+padding-top: 30px;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="col-xs-6 pt10">
+<form class="form-inline" id="number_form">
+<div class="form-group">
+<label for="numberInput">digit</label>
+<input type="text" class="form-control"
+placeholder="Enter Input"
+id="numberInput">
+</div>
+<button class="btn btn-primary" type="submit">submit</button>
+</form>
+<div class="row pt10">
+<div class="row col-xs-6 col-xs-offset-3" >
+<table class="table table-striped " id="table">
+<thead>
+<tr>
+<th>Sequence</th>
+<th>Given Input</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" class="tc">number.. </td>
+</tr>
+</tbody>
+</table>
+<button type="button" id="sortBtn" class="btn btn-default">Sort</button>
+</div>
+</div>
+</div>
+<div class="col-xs-6 pt10">
+<p class="bg-primary">
+
+</p>
+</div>
+</div>
+</div>
+<script>
+const oForm = document.getElementById('number_form');
+const oNumInput = document.getElementById('numberInput');
+const sortBtn = document.getElementById('sortBtn');
+const oMsg=document.querySelector('bg-primary');
+let gNum = 1;
+const numArr = [];
+const arr=[];
+const orderedArr=[];
+for(let i=0;i<101;i++){
+arr[i]=0;
+}
+oForm.addEventListener('submit', function(event) {
+event.preventDefault();
+const num = oNumInput.value.trim();
+if(num.length > 0 && !isNaN(num)) {
+if(gNum == 1) {
+document.querySelector('tbody').innerHTML = getTrHtml(num);
+} else {
+document.querySelector('tbody').innerHTML += getTrHtml(num);
+}
+numArr.push(parseInt(num));
+gNum++;
+oNumInput.value = '';
+} else {
+alert('please enter a valid input');
+}
+});
+function getTrHtml(num) {
+const str = `
+<tr>
+<td>${gNum}</td>
+<td>${num}</td>
+</tr>
+`;
+return str;
+}
+
+sortBtn.addEventListener('click', function() {
+
+for(let i=0;i<numArr.length;i++){
+arr[numArr[i]]++;
+}
+console.log(arr);
+for(let i=0;i<arr.length;i++){
+for(let j=0;j<arr[i];j++){
+// console.log(i+',');
+orderedArr.push(i);
+}
+}
+oMsg.innerHTML=`ascending order: ${orderedArr.join(',')}`;
+});
+
+</script>
+</body>
+</html>  
